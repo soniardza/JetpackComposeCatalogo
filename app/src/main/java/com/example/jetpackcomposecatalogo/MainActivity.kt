@@ -48,7 +48,8 @@ fun MyBox() {
                 .background(Color.Cyan)
                 .verticalScroll(
                     rememberScrollState()
-                )
+                ),
+            contentAlignment = Alignment.CenterEnd
         ) {
             Text(text = "Esto es un EJEMPLO")
         }
