@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -31,7 +33,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyBox()
+                    MyColumn()
                 }
             }
         }
@@ -56,10 +58,27 @@ fun MyBox() {
     }
 }
 
+@Composable
+fun MyColumn() {
+    /* Ejemplo usando Weight
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        Text(text = "Ejemplo 1", modifier = Modifier.background(Color.Cyan).weight(1f))
+        Text(text = "Ejemplo 2", modifier = Modifier.background(Color.Blue).weight(2f))
+        Text(text = "Ejemplo 3", modifier = Modifier.background(Color.Red).weight(1f))
+    } */
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
+        Text(text = "Ejemplo 1", modifier = Modifier.background(Color.Gray))
+        Text(text = "Ejemplo 2", modifier = Modifier.background(Color.Blue))
+        Text(text = "Ejemplo 3", modifier = Modifier.background(Color.Red))
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
-        MyBox()
+//        MyBox()
+        MyColumn()
     }
 }
