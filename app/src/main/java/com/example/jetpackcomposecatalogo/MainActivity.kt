@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -68,9 +71,48 @@ fun MyColumn() {
         Text(text = "Ejemplo 3", modifier = Modifier.background(Color.Red).weight(1f))
     } */
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
-        Text(text = "Ejemplo 1", modifier = Modifier.background(Color.Gray))
-        Text(text = "Ejemplo 2", modifier = Modifier.background(Color.Blue))
-        Text(text = "Ejemplo 3", modifier = Modifier.background(Color.Red))
+        Text(
+            text = "Ejemplo 1",
+            modifier = Modifier
+                .background(Color.Gray)
+                .fillMaxWidth()
+                .height(80.dp)
+        )
+        Text(
+            text = "Ejemplo 2",
+            modifier = Modifier
+                .background(Color.Blue)
+                .fillMaxWidth()
+                .height(80.dp)
+        )
+        Text(
+            text = "Ejemplo 3",
+            modifier = Modifier
+                .background(Color.Red)
+                .fillMaxWidth()
+                .height(80.dp)
+        )
+    }
+}
+
+@Composable
+fun MyRow() {
+    /*Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween) {
+        Text(text = "Ejemplo 1")
+        Text(text = "Ejemplo 2")
+        Text(text = "Ejemplo 3")
+    }*/
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .horizontalScroll(rememberScrollState())
+    ) {
+        Text(text = "Ejemplo 1", modifier = Modifier.width(100.dp))
+        Text(text = "Ejemplo 1", modifier = Modifier.width(100.dp))
+        Text(text = "Ejemplo 1", modifier = Modifier.width(100.dp))
+        Text(text = "Ejemplo 1", modifier = Modifier.width(100.dp))
+        Text(text = "Ejemplo 1", modifier = Modifier.width(100.dp))
+        Text(text = "Ejemplo 1", modifier = Modifier.width(100.dp))
     }
 }
 
@@ -79,6 +121,7 @@ fun MyColumn() {
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
 //        MyBox()
-        MyColumn()
+//        MyColumn()
+        MyRow()
     }
 }
