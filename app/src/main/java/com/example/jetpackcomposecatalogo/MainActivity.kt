@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyColumn()
+                    MyComplexLayout()
                 }
             }
         }
@@ -116,12 +117,49 @@ fun MyRow() {
     }
 }
 
+@Composable
+fun MyComplexLayout() {
+    Column(Modifier.fillMaxSize()) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .background(Color.Blue)
+        ) {
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            Box(modifier = Modifier.weight(1f).fillMaxHeight().background(Color.Red))
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color.Green),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "Hola, soy Sonia!")
+            }
+        }
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .background(Color.Magenta)
+        ) {
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun DefaltPreview() {
     JetpackComposeCatalogoTheme {
 //        MyBox()
 //        MyColumn()
-        MyRow()
+//        MyRow()
+        MyComplexLayout()
     }
 }
