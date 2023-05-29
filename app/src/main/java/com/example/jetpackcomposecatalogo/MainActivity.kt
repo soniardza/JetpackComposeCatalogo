@@ -121,18 +121,28 @@ fun MyRow() {
 fun MyComplexLayout() {
     Column(Modifier.fillMaxSize()) {
         Box(
-            Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .background(Color.Blue)
+                .background(Color.Cyan),
+            contentAlignment = Alignment.Center
         ) {
+            Text(text = "Ejemplo 1")
         }
         Row(
             Modifier
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            Box(modifier = Modifier.weight(1f).fillMaxHeight().background(Color.Red))
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color.Red),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "Ejemplo 2")
+            }
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -144,18 +154,20 @@ fun MyComplexLayout() {
             }
         }
         Box(
-            Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .background(Color.Magenta)
+                .background(Color.Magenta),
+            contentAlignment = Alignment.BottomCenter
         ) {
+            Text(text = "Ejemplo 4")
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaltPreview() {
+fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
 //        MyBox()
 //        MyColumn()
