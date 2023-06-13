@@ -1,4 +1,4 @@
-package com.example.jetpackcomposecatalogo
+package com.example.jetpackcomposecatalogo.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
