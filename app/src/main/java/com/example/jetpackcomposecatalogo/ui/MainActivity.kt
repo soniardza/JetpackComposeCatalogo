@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
-                    MyButton()
+                    MyButtonState()
                 }
             }
         }
@@ -84,7 +84,32 @@ fun DefaultPreview() {
 //        MyTextField()
 //        MyTextFieldAdvanced()
 //        MyTextFieldOutlined()
-        MyButton()
+//        MyButton()
+        MyButtonState()
+    }
+}
+
+@Composable
+fun MyButtonState() {
+    var enabled by rememberSaveable {
+        mutableStateOf(true)
+    }
+    val context = LocalContext.current
+    Column(Modifier.fillMaxSize().padding(24.dp)) {
+        Button(
+            onClick = {
+                myToast(context, "Has hecho click")
+                enabled = false
+            },
+            enabled = enabled,
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Magenta,
+                contentColor = Color.White
+            ),
+            border = BorderStroke(5.dp, Color.Cyan)
+        ) {
+            Text(text = "Hola")
+        }
     }
 }
 
