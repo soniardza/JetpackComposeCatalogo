@@ -24,6 +24,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -107,6 +108,23 @@ fun MyButtonState() {
                 contentColor = Color.White
             ),
             border = BorderStroke(5.dp, Color.Cyan)
+        ) {
+            Text(text = "Hola")
+        }
+
+        OutlinedButton(
+            onClick = {
+                myToast(context, "Has hecho click")
+                enabled = false
+            },
+            enabled = enabled,
+            modifier = Modifier.padding(top = 8.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Magenta,
+                contentColor = Color.White,
+                disabledBackgroundColor = Color.Blue,
+                disabledContentColor = Color.Red
+            )
         ) {
             Text(text = "Hola")
         }
