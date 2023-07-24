@@ -68,7 +68,7 @@ fun MyText() {
         )
         Text(
             text = "Esto es un ejemplo",
-            style = TextStyle(textDecoration = TextDecoration.Underline)
+            textDecoration = TextDecoration.Underline // si solo usamos un atributo para modificar el estilo, no es necesario usar style
         )
         Text(
             text = "Esto es un ejemplo",
