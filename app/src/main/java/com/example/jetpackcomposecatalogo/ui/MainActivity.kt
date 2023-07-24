@@ -54,12 +54,20 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column() {
-                        MyTextFieldOutlined()
+                        var myText by remember {
+                            mutableStateOf("")
+                        }
+                        MyStateHoisting(myText) { myText = it }
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+fun MyStateHoisting(name: String, onValueChange: (String) -> Unit) {
+    TextField(value = name, onValueChange = { onValueChange })
 }
 
 @Composable
@@ -300,6 +308,6 @@ fun DefaultPreview() {
 //        MyText()
 //        MyTextField()
 //        MyTextFieldAdvanced()
-        MyTextFieldOutlined()
+//        MyTextFieldOutlined()
     }
 }
