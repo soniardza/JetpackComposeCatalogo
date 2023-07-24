@@ -28,6 +28,7 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -65,7 +66,7 @@ class MainActivity : ComponentActivity() {
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
-                    MyButtonState()
+                    MyDifferentButtons()
                 }
             }
         }
@@ -86,12 +87,12 @@ fun DefaultPreview() {
 //        MyTextFieldAdvanced()
 //        MyTextFieldOutlined()
 //        MyButton()
-        MyButtonState()
+        MyDifferentButtons()
     }
 }
 
 @Composable
-fun MyButtonState() {
+fun MyDifferentButtons() {
     var enabled by rememberSaveable {
         mutableStateOf(true)
     }
@@ -128,6 +129,10 @@ fun MyButtonState() {
         ) {
             Text(text = "Hola")
         }
+
+        TextButton(onClick = { /*TODO*/ }) {
+            Text(text = "Hola")
+        }
     }
 }
 
@@ -146,10 +151,6 @@ fun MyButton() {
             Text(text = "Hola")
         }
     }
-}
-
-private fun myToast(context: Context, text: String) {
-    Toast.makeText(context, text, Toast.LENGTH_LONG).show()
 }
 
 @Composable
@@ -381,4 +382,8 @@ fun MyComplexLayout() {
 @Composable
 fun MySpacer(size: Int) {
     Spacer(modifier = Modifier.height(size.dp))
+}
+
+private fun myToast(context: Context, text: String) {
+    Toast.makeText(context, text, Toast.LENGTH_LONG).show()
 }
