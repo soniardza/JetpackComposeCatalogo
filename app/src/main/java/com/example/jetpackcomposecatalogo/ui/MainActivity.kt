@@ -35,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.jetpackcomposecatalogo.ui.theme.JetpackComposeCatalogoTheme
 
 class MainActivity : ComponentActivity() {
@@ -80,6 +81,10 @@ fun MyText() {
                     )
                 )
             )
+        )
+        Text(
+            text = "Esto es un ejemplo",
+            fontSize = 30.sp
         )
     }
 }
