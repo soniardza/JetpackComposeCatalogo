@@ -1,8 +1,11 @@
 package com.example.jetpackcomposecatalogo.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -19,10 +22,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -34,6 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -53,14 +60,95 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column() {
+                    /* Column() {
                         var myText by remember {
                             mutableStateOf("")
                         }
                         MyStateHoisting(myText) { myText = it }
-                    }
+                    } */
+                    MyDifferentButtons()
                 }
             }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    JetpackComposeCatalogoTheme {
+//        MyBox()
+//        MyColumn()
+//        MyRow()
+//        MyComplexLayout()
+//        MyStateExample()
+//        MyText()
+//        MyTextField()
+//        MyTextFieldAdvanced()
+//        MyTextFieldOutlined()
+//        MyButton()
+        MyDifferentButtons()
+    }
+}
+
+@Composable
+fun MyDifferentButtons() {
+    var enabled by rememberSaveable {
+        mutableStateOf(true)
+    }
+    val context = LocalContext.current
+    Column(Modifier.fillMaxSize().padding(24.dp)) {
+        Button(
+            onClick = {
+                myToast(context, "Has hecho click")
+                enabled = false
+            },
+            enabled = enabled,
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Magenta,
+                contentColor = Color.White
+            ),
+            border = BorderStroke(5.dp, Color.Cyan)
+        ) {
+            Text(text = "Hola")
+        }
+
+        OutlinedButton(
+            onClick = {
+                myToast(context, "Has hecho click")
+                enabled = false
+            },
+            enabled = enabled,
+            modifier = Modifier.padding(top = 8.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Magenta,
+                contentColor = Color.White,
+                disabledBackgroundColor = Color.Blue,
+                disabledContentColor = Color.Red
+            )
+        ) {
+            Text(text = "Hola")
+        }
+
+        TextButton(onClick = { /*TODO*/ }) {
+            Text(text = "Hola")
+        }
+    }
+}
+
+@Composable
+fun MyButton() {
+    val context = LocalContext.current
+    Column(Modifier.fillMaxSize().padding(24.dp)) {
+        Button(
+            onClick = { myToast(context, "Has hecho click") },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Magenta,
+                contentColor = Color.White
+            ),
+            border = BorderStroke(5.dp, Color.Cyan)
+        ) {
+            Text(text = "Hola")
         }
     }
 }
@@ -296,18 +384,6 @@ fun MySpacer(size: Int) {
     Spacer(modifier = Modifier.height(size.dp))
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    JetpackComposeCatalogoTheme {
-//        MyBox()
-//        MyColumn()
-//        MyRow()
-//        MyComplexLayout()
-//        MyStateExample()
-//        MyText()
-//        MyTextField()
-//        MyTextFieldAdvanced()
-//        MyTextFieldOutlined()
-    }
+private fun myToast(context: Context, text: String) {
+    Toast.makeText(context, text, Toast.LENGTH_LONG).show()
 }
