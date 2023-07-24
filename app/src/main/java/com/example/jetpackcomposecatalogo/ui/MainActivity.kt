@@ -1,6 +1,8 @@
 package com.example.jetpackcomposecatalogo.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -36,6 +38,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -87,9 +90,10 @@ fun DefaultPreview() {
 
 @Composable
 fun MyButton() {
+    val context = LocalContext.current
     Column(Modifier.fillMaxSize().padding(24.dp)) {
         Button(
-            onClick = { },
+            onClick = { myToast(context, "Has hecho click") },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color.Magenta,
                 contentColor = Color.White
@@ -99,6 +103,10 @@ fun MyButton() {
             Text(text = "Hola")
         }
     }
+}
+
+private fun myToast(context: Context, text: String) {
+    Toast.makeText(context, text, Toast.LENGTH_LONG).show()
 }
 
 @Composable
