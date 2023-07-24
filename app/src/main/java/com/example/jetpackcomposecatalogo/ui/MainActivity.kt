@@ -3,6 +3,7 @@ package com.example.jetpackcomposecatalogo.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
@@ -53,14 +55,48 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column() {
+                    /* Column() {
                         var myText by remember {
                             mutableStateOf("")
                         }
                         MyStateHoisting(myText) { myText = it }
-                    }
+                    } */
+                    MyButton()
                 }
             }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    JetpackComposeCatalogoTheme {
+//        MyBox()
+//        MyColumn()
+//        MyRow()
+//        MyComplexLayout()
+//        MyStateExample()
+//        MyText()
+//        MyTextField()
+//        MyTextFieldAdvanced()
+//        MyTextFieldOutlined()
+        MyButton()
+    }
+}
+
+@Composable
+fun MyButton() {
+    Column(Modifier.fillMaxSize().padding(24.dp)) {
+        Button(
+            onClick = { },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Magenta,
+                contentColor = Color.White
+            ),
+            border = BorderStroke(5.dp, Color.Cyan)
+        ) {
+            Text(text = "Hola")
         }
     }
 }
@@ -294,20 +330,4 @@ fun MyComplexLayout() {
 @Composable
 fun MySpacer(size: Int) {
     Spacer(modifier = Modifier.height(size.dp))
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    JetpackComposeCatalogoTheme {
-//        MyBox()
-//        MyColumn()
-//        MyRow()
-//        MyComplexLayout()
-//        MyStateExample()
-//        MyText()
-//        MyTextField()
-//        MyTextFieldAdvanced()
-//        MyTextFieldOutlined()
-    }
 }
