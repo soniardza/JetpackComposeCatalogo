@@ -14,14 +14,17 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,11 +53,30 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyTextFieldAdvanced()
+                    Column() {
+                        MyTextFieldOutlined()
+                    }
                 }
             }
         }
     }
+}
+
+@Composable
+fun MyTextFieldOutlined() {
+    var myText by remember {
+        mutableStateOf("")
+    }
+    OutlinedTextField(
+        value = myText,
+        onValueChange = { myText = it },
+        modifier = Modifier.padding(24.dp),
+        label = { Text(text = "Holiii") },
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            focusedBorderColor = Color.Magenta,
+            unfocusedBorderColor = Color.Blue
+        )
+    )
 }
 
 @Composable
@@ -277,6 +299,7 @@ fun DefaultPreview() {
 //        MyStateExample()
 //        MyText()
 //        MyTextField()
-        MyTextFieldAdvanced()
+//        MyTextFieldAdvanced()
+        MyTextFieldOutlined()
     }
 }
