@@ -50,11 +50,29 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyTextField()
+                    MyTextFieldAdvanced()
                 }
             }
         }
     }
+}
+
+@Composable
+fun MyTextFieldAdvanced() {
+    var myText by remember {
+        mutableStateOf("")
+    }
+    TextField(
+        value = myText,
+        onValueChange = {
+            myText = if (it.contains("a")) {
+                it.replace("a", "")
+            } else {
+                it
+            }
+        },
+        label = { Text(text = "Introduce tu nombre") }
+    )
 }
 
 @Composable
@@ -258,6 +276,7 @@ fun DefaultPreview() {
 //        MyComplexLayout()
 //        MyStateExample()
 //        MyText()
-        MyTextField()
+//        MyTextField()
+        MyTextFieldAdvanced()
     }
 }
