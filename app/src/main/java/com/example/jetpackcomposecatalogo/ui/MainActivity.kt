@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
-                    MyProgressBar()
+                    MyProgressBarAdvanced()
                 }
             }
         }
@@ -101,26 +101,60 @@ fun DefaultPreview() {
 //        MyDifferentButtons()
 //        MyImage()
 //        MyIcon()
-        MyProgressBar()
+        MyProgressBarAdvanced()
+    }
+}
+
+@Composable
+fun MyProgressBarAdvanced() {
+    var progressStatus by rememberSaveable { mutableStateOf(0.1f) }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(progress = progressStatus)
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Button(onClick = { progressStatus += 0.1f }) {
+                Text(text = "Incrementar")
+            }
+            Button(onClick = { progressStatus -= 0.1f }) {
+                Text(text = "Reducir")
+            }
+        }
     }
 }
 
 @Composable
 fun MyProgressBar() {
+    var showLoading by rememberSaveable {
+        mutableStateOf(true)
+    }
     Column(
         modifier = Modifier.fillMaxSize().padding(24.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        CircularProgressIndicator(
-            color = Color.Cyan,
-            strokeWidth = 10.dp
-        )
-        LinearProgressIndicator(
-            modifier = Modifier.padding(top = 32.dp),
-            color = Color.Blue,
-            backgroundColor = Color.Green
-        )
+        if (showLoading) {
+            CircularProgressIndicator(
+                color = Color.Cyan,
+                strokeWidth = 10.dp
+            )
+            LinearProgressIndicator(
+                modifier = Modifier.padding(top = 32.dp),
+                color = Color.Blue,
+                backgroundColor = Color.Green
+            )
+        }
+
+        Button(onClick = { showLoading = !showLoading }) {
+            Text(text = "Cargar perfil")
+        }
     }
 }
 
