@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -41,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -48,6 +50,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.jetpackcomposecatalogo.R
 import com.example.jetpackcomposecatalogo.ui.theme.JetpackComposeCatalogoTheme
 
 class MainActivity : ComponentActivity() {
@@ -66,7 +69,7 @@ class MainActivity : ComponentActivity() {
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
-                    MyDifferentButtons()
+                    MyImage()
                 }
             }
         }
@@ -87,8 +90,18 @@ fun DefaultPreview() {
 //        MyTextFieldAdvanced()
 //        MyTextFieldOutlined()
 //        MyButton()
-        MyDifferentButtons()
+//        MyDifferentButtons()
+        MyImage()
     }
+}
+
+@Composable
+fun MyImage() {
+    Image(
+        painter = painterResource(R.drawable.ic_launcher_background),
+        contentDescription = "ejemplo",
+        alpha = 0.5f
+    )
 }
 
 @Composable
