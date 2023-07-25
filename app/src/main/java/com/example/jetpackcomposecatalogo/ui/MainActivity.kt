@@ -81,7 +81,7 @@ class MainActivity : ComponentActivity() {
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
-                    MyCheckBox()
+                    MyCheckBoxWithText()
                 }
             }
         }
@@ -92,7 +92,23 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
-        MyCheckBox()
+        MyCheckBoxWithText()
+    }
+}
+
+@Composable
+fun MyCheckBoxWithText() {
+    var state by rememberSaveable {
+        mutableStateOf(true)
+    }
+
+    Column(modifier = Modifier.padding(8.dp)) {
+        Checkbox(
+            checked = state,
+            onCheckedChange = { state = !state }
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = "Ejemplo 1")
     }
 }
 
