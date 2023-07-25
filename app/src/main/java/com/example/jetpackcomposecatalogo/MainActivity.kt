@@ -1,4 +1,4 @@
-package com.example.jetpackcomposecatalogo.ui
+package com.example.jetpackcomposecatalogo
 
 import android.content.Context
 import android.os.Bundle
@@ -62,7 +62,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.jetpackcomposecatalogo.R
+import com.example.jetpackcomposecatalogo.ui.CheckInfo
 import com.example.jetpackcomposecatalogo.ui.theme.JetpackComposeCatalogoTheme
 
 class MainActivity : ComponentActivity() {
@@ -75,14 +75,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    /* Column() {
+                    /* State hoisting
+                    Column() {
                         var myText by remember {
                             mutableStateOf("")
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
+
+                    val myOptions = getOptions(listOf("Sonia", "Ejemplo", "Pickachu"))
                     Column() {
-                        MyCheckBoxWithText()
+                        myOptions.forEach {
+                            MyCheckBoxWithTextCompleted(it)
+                        }
                     }
                 }
             }
@@ -95,6 +100,36 @@ class MainActivity : ComponentActivity() {
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
         MyCheckBoxWithText()
+    }
+}
+
+@Composable
+fun getOptions(titles: List<String>): List<CheckInfo> {
+    return titles.map {
+        var status by rememberSaveable {
+            mutableStateOf(false)
+        }
+
+        CheckInfo(
+            title = it,
+            selected = status,
+            onCheckedChange = { newStatus -> status = newStatus }
+        )
+    }
+}
+
+@Composable
+fun MyCheckBoxWithTextCompleted(checkInfo: CheckInfo) {
+    Row(
+        modifier = Modifier.padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = checkInfo.selected,
+            onCheckedChange = { checkInfo.onCheckedChange(!checkInfo.selected) }
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = checkInfo.title)
     }
 }
 
@@ -191,7 +226,9 @@ fun MyProgressBar() {
         mutableStateOf(true)
     }
     Column(
-        modifier = Modifier.fillMaxSize().padding(24.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -227,7 +264,9 @@ fun MyImageAdvanced() {
     Image(
         painter = painterResource(R.drawable.ic_launcher_background),
         contentDescription = "ejemplo",
-        modifier = Modifier.clip(CircleShape).border(5.dp, Color.Red, CircleShape)
+        modifier = Modifier
+            .clip(CircleShape)
+            .border(5.dp, Color.Red, CircleShape)
     )
 }
 
@@ -246,7 +285,11 @@ fun MyDifferentButtons() {
         mutableStateOf(true)
     }
     val context = LocalContext.current
-    Column(Modifier.fillMaxSize().padding(24.dp)) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(24.dp)
+    ) {
         Button(
             onClick = {
                 myToast(context, "Has hecho click")
@@ -288,7 +331,11 @@ fun MyDifferentButtons() {
 @Composable
 fun MyButton() {
     val context = LocalContext.current
-    Column(Modifier.fillMaxSize().padding(24.dp)) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(24.dp)
+    ) {
         Button(
             onClick = { myToast(context, "Has hecho click") },
             colors = ButtonDefaults.buttonColors(
