@@ -26,7 +26,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
@@ -75,7 +77,7 @@ class MainActivity : ComponentActivity() {
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
-                    MyIcon()
+                    MyProgressBarAdvanced()
                 }
             }
         }
@@ -98,7 +100,61 @@ fun DefaultPreview() {
 //        MyButton()
 //        MyDifferentButtons()
 //        MyImage()
-        MyIcon()
+//        MyIcon()
+        MyProgressBarAdvanced()
+    }
+}
+
+@Composable
+fun MyProgressBarAdvanced() {
+    var progressStatus by rememberSaveable { mutableStateOf(0.1f) }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(progress = progressStatus)
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Button(onClick = { progressStatus += 0.1f }) {
+                Text(text = "Incrementar")
+            }
+            Button(onClick = { progressStatus -= 0.1f }) {
+                Text(text = "Reducir")
+            }
+        }
+    }
+}
+
+@Composable
+fun MyProgressBar() {
+    var showLoading by rememberSaveable {
+        mutableStateOf(true)
+    }
+    Column(
+        modifier = Modifier.fillMaxSize().padding(24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        if (showLoading) {
+            CircularProgressIndicator(
+                color = Color.Cyan,
+                strokeWidth = 10.dp
+            )
+            LinearProgressIndicator(
+                modifier = Modifier.padding(top = 32.dp),
+                color = Color.Blue,
+                backgroundColor = Color.Green
+            )
+        }
+
+        Button(onClick = { showLoading = !showLoading }) {
+            Text(text = "Cargar perfil")
+        }
     }
 }
 
