@@ -33,6 +33,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
+import androidx.compose.material.Switch
+import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TextField
@@ -77,7 +79,7 @@ class MainActivity : ComponentActivity() {
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
-                    MyProgressBarAdvanced()
+                    MySwitch()
                 }
             }
         }
@@ -88,21 +90,33 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
-//        MyBox()
-//        MyColumn()
-//        MyRow()
-//        MyComplexLayout()
-//        MyStateExample()
-//        MyText()
-//        MyTextField()
-//        MyTextFieldAdvanced()
-//        MyTextFieldOutlined()
-//        MyButton()
-//        MyDifferentButtons()
-//        MyImage()
-//        MyIcon()
-        MyProgressBarAdvanced()
+        MySwitch()
     }
+}
+
+@Composable
+fun MySwitch() {
+    var state by rememberSaveable {
+        mutableStateOf(true)
+    }
+
+    Switch(
+        checked = state,
+        onCheckedChange = { state = !state },
+        enabled = true,
+        colors = SwitchDefaults.colors(
+            uncheckedThumbColor = Color.Red,
+            uncheckedTrackColor = Color.Magenta,
+            checkedThumbColor = Color.Green,
+            checkedTrackColor = Color.Cyan,
+            checkedTrackAlpha = 0.1f,
+            uncheckedTrackAlpha = 0.1f,
+            disabledCheckedTrackColor = Color.Yellow,
+            disabledCheckedThumbColor = Color.Yellow,
+            disabledUncheckedTrackColor = Color.DarkGray,
+            disabledUncheckedThumbColor = Color.DarkGray
+        )
+    )
 }
 
 @Composable
