@@ -26,6 +26,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Checkbox
+import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.LinearProgressIndicator
@@ -79,7 +81,7 @@ class MainActivity : ComponentActivity() {
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
-                    MySwitch()
+                    MyCheckBox()
                 }
             }
         }
@@ -90,8 +92,26 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
-        MySwitch()
+        MyCheckBox()
     }
+}
+
+@Composable
+fun MyCheckBox() {
+    var state by rememberSaveable {
+        mutableStateOf(true)
+    }
+
+    Checkbox(
+        checked = state,
+        onCheckedChange = { state = !state },
+        enabled = true,
+        colors = CheckboxDefaults.colors(
+            checkedColor = Color.Cyan,
+            uncheckedColor = Color.Blue,
+            checkmarkColor = Color.DarkGray
+        )
+    )
 }
 
 @Composable
