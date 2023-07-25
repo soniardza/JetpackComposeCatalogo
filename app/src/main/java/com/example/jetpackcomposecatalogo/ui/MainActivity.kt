@@ -26,6 +26,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
@@ -34,6 +35,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -72,7 +75,7 @@ class MainActivity : ComponentActivity() {
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
-                    MyImageAdvanced()
+                    MyIcon()
                 }
             }
         }
@@ -95,8 +98,17 @@ fun DefaultPreview() {
 //        MyButton()
 //        MyDifferentButtons()
 //        MyImage()
-        MyImageAdvanced()
+        MyIcon()
     }
+}
+
+@Composable
+fun MyIcon() {
+    Icon(
+        imageVector = Icons.Rounded.Star,
+        contentDescription = "Icono",
+        tint = Color.Red
+    )
 }
 
 @Composable
