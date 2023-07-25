@@ -81,7 +81,9 @@ class MainActivity : ComponentActivity() {
                         }
                         MyStateHoisting(myText) { myText = it }
                     } */
-                    MyCheckBoxWithText()
+                    Column() {
+                        MyCheckBoxWithText()
+                    }
                 }
             }
         }
@@ -99,10 +101,13 @@ fun DefaultPreview() {
 @Composable
 fun MyCheckBoxWithText() {
     var state by rememberSaveable {
-        mutableStateOf(true)
+        mutableStateOf(false)
     }
 
-    Column(modifier = Modifier.padding(8.dp)) {
+    Row(
+        modifier = Modifier.padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Checkbox(
             checked = state,
             onCheckedChange = { state = !state }
