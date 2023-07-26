@@ -32,6 +32,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -84,7 +85,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column() {
-                        MyBadgeBox()
+                        MyDivider()
                     }
                 }
             }
@@ -96,8 +97,16 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
-        MyBadgeBox()
+        MyDivider()
     }
+}
+
+@Composable
+fun MyDivider() {
+    Divider(
+        modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+        color = Color.Red
+    )
 }
 
 @Composable
