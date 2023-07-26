@@ -79,21 +79,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    /* State hoisting
-                    Column() {
-                        var myText by remember {
-                            mutableStateOf("")
-                        }
-                        MyStateHoisting(myText) { myText = it }
-                    } */
-
-                    val myOptions = getOptions(listOf("Sonia", "Ejemplo", "Pickachu"))
-                    Column() {
-                        MyTriStatusCheckBox()
-                        myOptions.forEach {
-                            MyCheckBoxWithTextCompleted(it)
-                        }
-                    }
+                    radioButtonStateHoisting()
                 }
             }
         }
@@ -104,7 +90,36 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
-        MyCheckBoxWithText()
+    }
+}
+
+@Composable
+fun radioButtonStateHoisting() {
+    var selected by remember {
+        mutableStateOf("Sonia")
+    }
+    MyRadioButtonList(name = selected, onItemSelected = { selected = it })
+}
+
+@Composable
+fun MyRadioButtonList(name: String, onItemSelected: (String) -> Unit) {
+    Column(Modifier.fillMaxWidth()) {
+        Row {
+            RadioButton(selected = name == "Sonia", onClick = { onItemSelected("Sonia") })
+            Text(text = "Sonia")
+        }
+        Row {
+            RadioButton(selected = name == "Irene", onClick = { onItemSelected("Irene") })
+            Text(text = "Irene")
+        }
+        Row {
+            RadioButton(selected = name == "Vale", onClick = { onItemSelected("Vale") })
+            Text(text = "Vale")
+        }
+        Row {
+            RadioButton(selected = name == "Juan", onClick = { onItemSelected("Juan") })
+            Text(text = "Juan")
+        }
     }
 }
 
@@ -122,6 +137,18 @@ fun MyRadioButton() {
             )
         )
         Text(text = "Ejemplo 1")
+    }
+}
+
+@Composable
+fun checkBoxStateHoisting() {
+    val myOptions = getOptions(listOf("Sonia", "Ejemplo", "Pickachu"))
+
+    Column() {
+        MyTriStatusCheckBox()
+        myOptions.forEach {
+            MyCheckBoxWithTextCompleted(it)
+        }
     }
 }
 
@@ -384,6 +411,16 @@ fun MyButton() {
         ) {
             Text(text = "Hola")
         }
+    }
+}
+
+@Composable
+fun callMyStateHoisting() {
+    Column() {
+        var myText by remember {
+            mutableStateOf("")
+        }
+        MyStateHoisting(myText) { myText = it }
     }
 }
 
