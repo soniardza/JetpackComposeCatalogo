@@ -41,6 +41,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.TriStateCheckbox
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
@@ -55,6 +56,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -85,6 +87,7 @@ class MainActivity : ComponentActivity() {
 
                     val myOptions = getOptions(listOf("Sonia", "Ejemplo", "Pickachu"))
                     Column() {
+                        MyTriStatusCheckBox()
                         myOptions.forEach {
                             MyCheckBoxWithTextCompleted(it)
                         }
@@ -101,6 +104,22 @@ fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
         MyCheckBoxWithText()
     }
+}
+
+@Composable
+fun MyTriStatusCheckBox() {
+    var status by rememberSaveable { mutableStateOf(ToggleableState.Off) }
+
+    TriStateCheckbox(
+        state = status,
+        onClick = {
+            status = when (status) {
+                ToggleableState.On -> ToggleableState.Off
+                ToggleableState.Off -> ToggleableState.Indeterminate
+                ToggleableState.Indeterminate -> ToggleableState.On
+            }
+        }
+    )
 }
 
 @Composable
