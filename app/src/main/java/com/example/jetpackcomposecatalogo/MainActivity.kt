@@ -9,6 +9,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,6 +34,8 @@ import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -85,7 +88,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column() {
-                        MyDivider()
+                        MyDropDownMenu()
                     }
                 }
             }
@@ -97,7 +100,42 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
-        MyDivider()
+        MyDropDownMenu()
+    }
+}
+
+@Composable
+fun MyDropDownMenu() {
+    var selectedText by remember { mutableStateOf("") }
+    var expanded by remember { mutableStateOf(false) }
+    val desserts = listOf("Helado", "Chocolate", "Cafe", "Fruta", "Flan")
+
+    Column(Modifier.padding(20.dp)) {
+        OutlinedTextField(
+            value = selectedText,
+            onValueChange = { selectedText = it },
+            enabled = false,
+            readOnly = true,
+            modifier = Modifier
+                .clickable { expanded = true }
+                .fillMaxWidth()
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            desserts.forEach { desserts ->
+                DropdownMenuItem(
+                    onClick = {
+                        expanded = false
+                        selectedText = desserts
+                    }
+                ) {
+                    Text(text = desserts)
+                }
+            }
+        }
     }
 }
 
