@@ -24,6 +24,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Badge
+import androidx.compose.material.BadgedBox
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
@@ -46,6 +48,7 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.TriStateCheckbox
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -80,7 +83,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyCard()
+                    Column() {
+                        MyBadgeBox()
+                    }
                 }
             }
         }
@@ -91,7 +96,24 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
-        MyCard()
+        MyBadgeBox()
+    }
+}
+
+@Composable
+fun MyBadgeBox() {
+    BadgedBox(
+        badge = {
+            Badge {
+                Text(
+                    text = "100",
+                    fontSize = 14.sp
+                )
+            }
+        },
+        modifier = Modifier.padding(16.dp)
+    ) {
+        Icon(imageVector = Icons.Default.Star, contentDescription = "Star")
     }
 }
 
