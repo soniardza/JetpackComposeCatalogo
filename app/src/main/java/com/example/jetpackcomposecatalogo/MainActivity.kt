@@ -26,6 +26,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.CircularProgressIndicator
@@ -79,7 +80,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    radioButtonStateHoisting()
+                    MyCard()
                 }
             }
         }
@@ -90,6 +91,25 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
+        MyCard()
+    }
+}
+
+@Composable
+fun MyCard() {
+    Card(
+        modifier = Modifier.fillMaxWidth().padding(16.dp),
+        elevation = 12.dp,
+        shape = MaterialTheme.shapes.small,
+        backgroundColor = Color.Yellow,
+        contentColor = Color.Blue,
+        border = BorderStroke(5.dp, Color.Green)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(text = "Ejemplo 1")
+            Text(text = "Ejemplo 1")
+            Text(text = "Ejemplo 1")
+        }
     }
 }
 
