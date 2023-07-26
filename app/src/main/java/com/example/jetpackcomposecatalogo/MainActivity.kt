@@ -34,6 +34,8 @@ import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.RadioButton
+import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Surface
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
@@ -103,6 +105,23 @@ class MainActivity : ComponentActivity() {
 fun DefaultPreview() {
     JetpackComposeCatalogoTheme {
         MyCheckBoxWithText()
+    }
+}
+
+@Composable
+fun MyRadioButton() {
+    Row(Modifier.fillMaxWidth()) {
+        RadioButton(
+            selected = true,
+            onClick = { /*TODO*/ },
+            enabled = false,
+            colors = RadioButtonDefaults.colors(
+                selectedColor = Color.Yellow,
+                unselectedColor = Color.Blue,
+                disabledColor = Color.Magenta
+            )
+        )
+        Text(text = "Ejemplo 1")
     }
 }
 
