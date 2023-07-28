@@ -8,3 +8,5 @@
 Lapp/src/main/java/com/example/jetpackcomposecatalogo/ui/ConstraintExample.kt,9/e/9e40bca65b838e6ed64be6e759aa20d1167cb669
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+t
+Dapp/src/main/java/com/example/jetpackcomposecatalogo/ui/CheckInfo.kt,0/6/06a8e6082fdf283a9c7e6a2aead5841b6e541247
