@@ -12,8 +12,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -35,6 +37,67 @@ import androidx.compose.ui.window.DialogProperties
 
 const val EXAMPLE_TEXT = "Esto es un ejemplo"
 const val SHOW_DIALOG = "Mostrar diálogo"
+
+// A Confirmation dialog
+
+@Composable
+fun ShowMyConfirmationDialog() {
+    var show by remember {
+        mutableStateOf(false)
+    }
+
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Button(onClick = { show = true }) {
+            Text(text = SHOW_DIALOG)
+        }
+        MyConfirmationDialog(
+            show = show,
+            onDismiss = { show = false }
+        )
+    }
+}
+
+@Composable
+fun MyConfirmationDialog(
+    show: Boolean,
+    onDismiss: () -> Unit,
+) {
+    if (show) {
+        Dialog(onDismissRequest = { onDismiss() }) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .background(
+                        Color.White,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+            ) {
+                MyTitleDialog(text = "Phone ringtone", modifier = Modifier.padding(24.dp))
+                Divider(modifier = Modifier.fillMaxWidth(), color = Color.LightGray)
+
+                var status by remember {
+                    mutableStateOf("")
+                }
+
+                MyRadioButtonList(name = status, onItemSelected = { status = it })
+
+                Divider(modifier = Modifier.fillMaxWidth(), color = Color.LightGray)
+
+                Row(Modifier.align(Alignment.End).padding(8.dp)) {
+                    TextButton(onClick = { }) {
+                        Text(text = "CANCEL")
+                    }
+                    TextButton(onClick = { }) {
+                        Text(text = "OK")
+                    }
+                }
+            }
+        }
+    }
+}
 
 // An advanced custom dialog
 @Composable
@@ -80,12 +143,12 @@ fun MyCustomDialog(
 }
 
 @Composable
-fun MyTitleDialog(text: String) {
+fun MyTitleDialog(text: String, modifier: Modifier = Modifier.padding(12.dp)) {
     Text(
         text = text,
         fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp,
-        modifier = Modifier.padding(12.dp)
+        modifier = modifier
     )
 }
 

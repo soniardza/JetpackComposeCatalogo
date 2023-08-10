@@ -88,7 +88,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column() {
-                        ShowMyCustomDialog()
+                        ShowMyConfirmationDialog()
                     }
                 }
             }
